@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Letter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <button class="btn btn-reset">🔁 Reset❗</button>
+      <h1 class="game-title">🖊️Guess the Coursive Letter 👩‍🏫</h1>
+      <p class="case">Low and Upper Case 🤩</p>
+    </header>
+    <section class="middle">
+      <button class="btn btn-check">Check❗</button>
+      <input type="text" class="guess" maxlength="1" />
+     <p class="letter"><span class="letter example-letter">❓</span></p> 
+ 
+      <div class="letter cap-letter">❓</div>
+      <div class="letter low-letter">❓</div>
+    </section>
+    <p class="other-types">↖️ Other Types ↗️</p>
+    <main>
+      <section class="bottom">
+        <p class="message">🤔Start guessing ...</p>
+        <p class="label-score">💯 Score: <span class="score">10</span></p>
+        <p class="label-highscore">
+          🎖️ Highscore: <span class="highscore">0</span>
+        </p>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
