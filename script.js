@@ -30,9 +30,9 @@ function displayRandomLetter(rl) {
 
 }
 
-//Display other typologies of the letter
+//Display other typographies of the letter
 //Set UpperCase Cursive
-const renderTypografies = (letter) => {
+const renderTypographies = (letter) => {
   //Render lower manuscript letter
   lowLetter.textContent = letter.toLowerCase();
 
@@ -94,7 +94,7 @@ btnCheck.addEventListener("click", function () {
         currentHighScore++;
         highScore.textContent = currentHighScore;
 
-        renderTypografies(randomLetter);
+        renderTypographies(randomLetter);
 
         setTimeout(function () {
           cleanData();
