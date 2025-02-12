@@ -90,7 +90,7 @@ btnCheck.addEventListener("click", function () {
       //if the letter is correct
 
       if (guess === randomLetter || guess.toLowerCase() === randomLetter) {
-        message.textContent = "Correct!";
+        message.textContent = "Correct! 🏆 Wait and Guess ";
         currentHighScore++;
         highScore.textContent = currentHighScore;
 
