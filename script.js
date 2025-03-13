@@ -1,4 +1,6 @@
 "use strict";
+import translations from './translations.js';
+
 //Selecting the elements
 const body = document.querySelector("body");
 const btnReset = document.querySelector(".btn-reset");
@@ -10,6 +12,66 @@ const lowLetter = document.querySelector(".low-letter"); //Letter in low cursive
 const message = document.querySelector(".message");
 const score = document.querySelector(".score");
 const highScore = document.querySelector(".highscore");
+const flags = document.querySelectorAll('.language-container .flag');
+const types = document.querySelector(".other-types");
+const title = document.querySelector(".game-title");
+const caso = document.querySelector(".case");
+const liveScore= document.querySelector(".label-score");
+const scoreMessage = document.querySelector(".label-highscore");
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  message.textContent = translations[currentLang].startMessage;
+  btnReset.textContent = translations[currentLang].resetMessage;
+  btnCheck.textContent = translations[currentLang].checkMessage;
+  types.textContent = translations[currentLang].typesMessage;
+  title.textContent = translations[currentLang].titleMessage; 
+  caso.textContent = translations[currentLang].caseMessage;
+// <p> solo
+liveScore.childNodes[0].textContent = translations[currentLang].lives;
+scoreMessage.childNodes[0].textContent = translations[currentLang].score;
+
+});
+
+// Loop through each flag and add an event listener
+flags.forEach(flag => {
+  flag.addEventListener('click', () => {
+   const selectedLang = flag.dataset.lang; // Get the language from the data-lang attribute
+   changeLanguage(selectedLang); // Change the language of the game
+    cleanData(); // Reset the game
+    console.log("flag clicked");
+  });
+});
+
+//Initial language setting
+let currentLang = 'en'; // Default language is English
+// If the browser language is not supported, fall back to English
+if (!translations[currentLang]) {
+  currentLang = 'en';
+}
+
+const changeLanguage = (lang) => {
+  currentLang = translations[lang] ? lang : 'en'; // Cambia el idioma o usa inglés por defecto
+
+  // Actualiza todos los mensajes del juego al nuevo idioma
+  message.textContent = translations[currentLang].startMessage;
+  btnReset.textContent = translations[currentLang].resetMessage;
+  btnCheck.textContent = translations[currentLang].checkMessage;
+  types.textContent = translations[currentLang].typesMessage;
+  title.textContent = translations[currentLang].titleMessage; 
+  caso.textContent = translations[currentLang].caseMessage;
+  liveScore.childNodes[0].textContent = translations[currentLang].lives;
+  scoreMessage.childNodes[0].textContent = translations[currentLang].score;
+  cleanData();
+  highScore.textContent = 0;
+  score.textContent = 10;
+  body.style.backgroundColor = "rgba(255, 214, 90, 0.8)";
+  currentScore = 10;
+  currentHighScore = 0;
+
+};
+
 
 //Generating a random letter
 function getRandomLetter() {
@@ -52,7 +114,7 @@ const cleanData = () => {
   inputGuess.value = "";
   capLetter.textContent = "❓";
   lowLetter.textContent = "❓";
-  message.textContent = "🤔 Start guessing ...";
+  message.textContent = translations[currentLang].startMessage;
 
 };
 
@@ -85,12 +147,12 @@ btnCheck.addEventListener("click", function () {
 
   if (currentScore > 0) {
     if (!guess || !/^[A-Z]$/.test(guess)) {
-      message.textContent = "Please enter a valid letter";
+      message.textContent = translations[currentLang].enterValidLetter;
     } else {
       //if the letter is correct
 
       if (guess === randomLetter || guess.toLowerCase() === randomLetter) {
-        message.textContent = "Correct! 🏆 Wait and Guess ";
+        message.textContent = translations[currentLang].correctMessage;
         currentHighScore++;
         highScore.textContent = currentHighScore;
 
@@ -98,18 +160,18 @@ btnCheck.addEventListener("click", function () {
 
         setTimeout(function () {
           cleanData();
-        }, 3500);
+        }, 2000);
 
         //if the letter is incorrect
       } else {
-        message.textContent = "Incorrect!";
+        message.textContent =  translations[currentLang].incorrectMessage;
         currentScore--;
         score.textContent = currentScore;
 
       }
     }
   } else {
-    message.textContent = "You lost the game! 💥 Try again! ";
+    message.textContent = translations[currentLang].gameOverMessage;
     body.style.backgroundColor = "rgba(122, 122, 122, 1)";
 
   }
